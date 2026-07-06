@@ -3,34 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sauda Sambhar Shop</title>
 
 <link rel="stylesheet" href="css/style.css">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
 
 <body>
 
 <!-- Header -->
+
 <header>
 
 <div class="logo">
-🛒 <span>Sauda Sambhar Shop</span>
+🛒 Sauda Sambhar Shop
 </div>
 
 <nav>
+
 <a href="index.html">Home</a>
+
 <a href="login.html">Login</a>
+
 <a href="admin.html">Admin</a>
+
 </nav>
 
 <div class="icons">
-<i class="fa-solid fa-magnifying-glass"></i>
-<i class="fa-solid fa-heart"></i>
-<i class="fa-solid fa-cart-shopping"></i>
+
+<i class="fas fa-search"></i>
+
+<i class="fas fa-heart"></i>
+
+<i class="fas fa-shopping-cart"></i>
+
 </div>
 
 </header>
@@ -45,9 +58,15 @@
 
 <div class="search-box">
 
-<input type="text" placeholder="Search Products...">
+<input
+type="text"
+placeholder="Search Products...">
 
-<button>Search</button>
+<button>
+
+<i class="fas fa-search"></i>
+
+</button>
 
 </div>
 
@@ -63,22 +82,22 @@
 
 <div class="category">
 🍯
-<p>Honey</p>
+<span>Honey</span>
 </div>
 
 <div class="category">
 🌴
-<p>Dates</p>
+<span>Dates</span>
 </div>
 
 <div class="category">
 🥜
-<p>Nuts</p>
+<span>Nuts</span>
 </div>
 
 <div class="category">
 🌾
-<p>Seeds</p>
+<span>Seeds</span>
 </div>
 
 </div>
@@ -87,13 +106,13 @@
 
 <!-- Products -->
 
-<section class="products">
+<section class="products-section">
 
 <h2>Featured Products</h2>
 
-<div id="productList">
+<div id="productList" class="products">
 
-<!-- Firebase Products Show Here -->
+<!-- Products Load From Firebase -->
 
 </div>
 
@@ -115,7 +134,7 @@
 
 <h3>Sauda Sambhar Shop</h3>
 
-<p>Fresh • Healthy • Organic</p>
+<p>Fresh • Healthy • Organic Products</p>
 
 <p>© 2026 All Rights Reserved.</p>
 
