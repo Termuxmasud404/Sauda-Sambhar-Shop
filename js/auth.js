@@ -1,53 +1,98 @@
-// auth.js
-
-import { auth } from "./firebase.js";
+vimport { auth } from "./firebase.js";
 
 import {
   signInWithEmailAndPassword,
-  onAuthStateChanged,
+  createUserWithEmailAndPassword,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
+// ---------- LOGIN ----------
 const loginForm = document.getElementById("loginForm");
 
-// Login
 if (loginForm) {
+
   loginForm.addEventListener("submit", async (e) => {
+
     e.preventDefault();
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
     try {
+
       await signInWithEmailAndPassword(auth, email, password);
 
-      alert("✅ Login Successful!");
+      alert("✅ Login Successful");
 
-      // Redirect to Admin Panel
       window.location.href = "admin.html";
 
     } catch (error) {
-      alert("❌ " + error.message);
+
+      switch (error.code) {
+
+        case "auth/invalid-credential":
+          alert("❌ Wrong Email or Password");
+          break;
+
+        case "auth/user-not-found":
+          alert("❌ User not found");
+          break;
+
+        case "auth/wrong-password":
+          alert("❌ Wrong Password");
+          break;
+
+        case "auth/invalid-email":
+          alert("❌ Invalid Email");
+          break;
+
+        default:
+          alert(error.message);
+
+      }
+
     }
+
   });
+
 }
 
-// Check Login Status
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Logged in:", user.email);
-  } else {
-    console.log("Not logged in");
-  }
-});
+// ---------- REGISTER ----------
+const registerForm = document.getElementById("registerForm");
 
-// Logout Function
+if (registerForm) {
+
+  registerForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      alert("✅ Registration Successful");
+
+      window.location.href = "login.html";
+
+    } catch (error) {
+
+      alert(error.message);
+
+    }
+
+  });
+
+}
+
+// ---------- LOGOUT ----------
+
 window.logout = async function () {
-  try {
-    await signOut(auth);
-    alert("✅ Logged Out Successfully!");
-    window.location.href = "login.html";
-  } catch (error) {
-    alert(error.message);
-  }
+
+  await signOut(auth);
+
+  window.location.href = "login.html";
+
 };
