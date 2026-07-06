@@ -1,0 +1,189 @@
+/* ===== Sauda Sambhar Shop ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#333;
+}
+
+/* Header */
+header{
+    background:#2e7d32;
+    color:#fff;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-size:26px;
+}
+
+nav a,
+header a{
+    color:#fff;
+    text-decoration:none;
+    margin-left:15px;
+    font-weight:bold;
+}
+
+nav a:hover,
+header a:hover{
+    text-decoration:underline;
+}
+
+/* Hero */
+.hero{
+    text-align:center;
+    padding:50px 20px;
+    background:#4caf50;
+    color:#fff;
+}
+
+.hero h2{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+/* Product Section */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.card,
+.product-card{
+    background:#fff;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.card h3,
+.product-card h4{
+    margin:12px 0;
+}
+
+.card p,
+.product-card p{
+    color:#2e7d32;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* Buttons */
+button{
+    background:#2e7d32;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    margin:5px;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+/* Login */
+.login-container{
+    width:350px;
+    margin:70px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.login-container h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.login-container input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.login-container button{
+    width:100%;
+}
+
+/* Admin */
+.admin-container{
+    max-width:1000px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.add-product,
+.product-list{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.add-product input,
+.add-product textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+textarea{
+    resize:vertical;
+    min-height:100px;
+}
+
+/* Footer */
+footer{
+    background:#2e7d32;
+    color:#fff;
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+header{
+    flex-direction:column;
+    gap:10px;
+}
+
+.login-container{
+    width:90%;
+}
+
+.products{
+    grid-template-columns:1fr;
+}
+
+}
