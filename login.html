@@ -1,32 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Sauda Sambhar Shop</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | Sauda Sambhar Shop</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
 <body>
 
-<div class="login-container">
-    <h2>🔐 Login</h2>
+<header>
+    <div class="logo">
+        🛒 <span>Sauda Sambhar Shop</span>
+    </div>
 
-    <form id="loginForm">
-        <input type="email" id="email" placeholder="Email Address" required>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html" class="active">Login</a>
+    </nav>
+</header>
 
-        <input type="password" id="password" placeholder="Password" required>
+<section class="login-page">
 
-        <button type="submit">Login</button>
-    </form>
+<div class="login-card">
 
-    <p>Don't have an account? <a href="#">Register</a></p>
+<h1>Welcome Back 👋</h1>
 
-    <br>
+<p>Login to your account</p>
 
-    <a href="index.html">
-        <button>🏠 Back to Home</button>
-    </a>
+<form id="loginForm">
+
+<div class="input-box">
+<i class="fa-solid fa-envelope"></i>
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
 </div>
+
+<div class="input-box">
+<i class="fa-solid fa-lock"></i>
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+required>
+</div>
+
+<button type="submit" class="login-btn">
+<i class="fa-solid fa-right-to-bracket"></i>
+Login
+</button>
+
+</form>
+
+<div class="extra-links">
+<a href="#">Forgot Password?</a>
+
+<p>
+Don't have an account?
+<a href="#">Register</a>
+</p>
+</div>
+
+<a href="index.html" class="home-btn">
+🏠 Back To Home
+</a>
+
+</div>
+
+</section>
 
 <script type="module" src="js/auth.js"></script>
 
