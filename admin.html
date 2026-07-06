@@ -1,62 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Sauda Sambhar Shop</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel | Sauda Sambhar Shop</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
 <body>
 
 <header>
-    <h1>🛠️ Sauda Sambhar Shop - Admin Panel</h1>
-    <a href="index.html">🏠 Home</a>
+
+<div class="logo">
+🛒 <span>Sauda Sambhar Shop</span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<button onclick="logout()">Logout</button>
+</nav>
+
 </header>
 
-<main class="admin-container">
+<div class="admin-container">
 
-    <h2>Dashboard</h2>
+<h1>👨‍💼 Admin Dashboard</h1>
 
-    <section class="add-product">
-        <h3>Add New Product</h3>
+<form id="productForm">
 
-        <form id="productForm">
-            <input type="text" id="name" placeholder="Product Name" required>
+<input
+type="text"
+id="name"
+placeholder="Product Name"
+required>
 
-            <input type="number" id="price" placeholder="Price" required>
+<input
+type="number"
+id="price"
+placeholder="Product Price"
+required>
 
-            <input type="text" id="image" placeholder="Image URL" required>
+<textarea
+id="description"
+placeholder="Product Description"></textarea>
 
-            <textarea id="description" placeholder="Product Description"></textarea>
+<label class="upload-box">
 
-            <button type="submit">➕ Add Product</button>
-        </form>
-    </section>
+<i class="fa-solid fa-image"></i>
 
-    <hr>
+Choose Product Image
 
-    <section class="product-list">
-        <h3>All Products</h3>
+<input
+type="file"
+id="imageFile"
+accept="image/*"
+required
+hidden>
 
-        <div id="products">
-            <!-- Products will appear here -->
+</label>
 
-            <div class="product-card">
-                <h4>Sample Product</h4>
-                <p>৳500</p>
+<img
+id="preview"
+src=""
+style="display:none;width:150px;border-radius:10px;margin:15px 0;">
 
-                <button>Edit</button>
-                <button>Delete</button>
-            </div>
+<button type="submit">
 
-        </div>
-    </section>
+<i class="fa-solid fa-plus"></i>
 
-    <br>
+Add Product
 
-    <button id="logoutBtn">🚪 Logout</button>
+</button>
 
-</main>
+</form>
+
+<hr>
+
+<h2>All Products</h2>
+
+<div id="products">
+
+<!-- Firebase Products -->
+
+</div>
+
+</div>
+
+<script>
+const file=document.getElementById("imageFile");
+const preview=document.getElementById("preview");
+
+file.addEventListener("change",()=>{
+
+const img=file.files[0];
+
+if(img){
+
+preview.src=URL.createObjectURL(img);
+
+preview.style.display="block";
+
+}
+
+});
+</script>
 
 <script type="module" src="js/admin.js"></script>
 
