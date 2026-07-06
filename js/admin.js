@@ -1,6 +1,9 @@
-// admin.js
+import { auth, db, storage } from "./firebase.js";
 
-import { db } from "./firebase.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
   collection,
@@ -10,72 +13,128 @@ import {
   doc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const productForm = document.getElementById("productForm");
-const productsDiv = document.getElementById("products");
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+
+// শুধুমাত্র Admin Email
+const ADMIN_EMAIL = "xdmr328@gmail.com";
+
+const form = document.getElementById("productForm");
+const products = document.getElementById("products");
+
+// Admin Check
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+        location.href = "login.html";
+        return;
+    }
+
+    if (user.email !== ADMIN_EMAIL) {
+        alert("Access Denied!");
+        location.href = "index.html";
+        return;
+    }
+
+    loadProducts();
+
+});
+
+// Logout
+document.getElementById("logoutBtn").onclick = () => {
+    signOut(auth);
+};
 
 // Add Product
-if (productForm) {
-  productForm.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e) => {
+
     e.preventDefault();
 
     const name = document.getElementById("name").value;
     const price = document.getElementById("price").value;
-    const image = document.getElementById("image").value;
     const description = document.getElementById("description").value;
 
-    try {
-      await addDoc(collection(db, "products"), {
-        name,
-        price,
-        image,
-        description,
-        createdAt: new Date()
-      });
+    const file = document.getElementById("imageFile").files[0];
 
-      alert("✅ Product Added Successfully!");
-      productForm.reset();
-      loadProducts();
-
-    } catch (error) {
-      alert(error.message);
+    if (!file) {
+        alert("Select Image");
+        return;
     }
-  });
-}
+
+    try {
+
+        const imageRef = ref(storage, "products/" + Date.now());
+
+        await uploadBytes(imageRef, file);
+
+        const image = await getDownloadURL(imageRef);
+
+        await addDoc(collection(db, "products"), {
+
+            name,
+            price,
+            description,
+            image
+
+        });
+
+        alert("Product Added");
+
+        form.reset();
+
+        document.getElementById("preview").style.display = "none";
+
+        loadProducts();
+
+    } catch (err) {
+
+        alert(err.message);
+
+    }
+
+});
 
 // Load Products
 async function loadProducts() {
-  if (!productsDiv) return;
 
-  productsDiv.innerHTML = "";
+    products.innerHTML = "";
 
-  const snapshot = await getDocs(collection(db, "products"));
+    const snapshot = await getDocs(collection(db, "products"));
 
-  snapshot.forEach((item) => {
-    const product = item.data();
+    snapshot.forEach((item) => {
 
-    productsDiv.innerHTML += `
-      <div class="product-card">
-        <img src="${product.image}" width="100">
-        <h4>${product.name}</h4>
-        <p>৳${product.price}</p>
+        const p = item.data();
 
-        <button onclick="deleteProduct('${item.id}')">
-          Delete
-        </button>
-      </div>
-    `;
-  });
+        products.innerHTML += `
+        <div class="card">
+
+            <img src="${p.image}" width="100%">
+
+            <h3>${p.name}</h3>
+
+            <p>৳${p.price}</p>
+
+            <button onclick="deleteProduct('${item.id}')">
+                Delete
+            </button>
+
+        </div>
+        `;
+
+    });
+
 }
 
 // Delete Product
-window.deleteProduct = async function (id) {
-  if (!confirm("Delete this product?")) return;
+window.deleteProduct = async (id) => {
 
-  await deleteDoc(doc(db, "products", id));
+    if (!confirm("Delete Product?")) return;
 
-  alert("🗑️ Product Deleted");
-  loadProducts();
+    await deleteDoc(doc(db, "products", id));
+
+    loadProducts();
+
 };
-
-// Start
-loadProducts();
