@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Admin Panel | Sauda Sambhar Shop</title>
 
 <link rel="stylesheet" href="css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
+
 <body>
 
 <header>
 
 <div class="logo">
-🛒 <span>Sauda Sambhar Shop</span>
+🛒 Sauda Sambhar Shop
 </div>
 
 <nav>
+
 <a href="index.html">Home</a>
-<button onclick="logout()">Logout</button>
+
+<button id="logoutBtn">
+<i class="fas fa-sign-out-alt"></i>
+Logout
+</button>
+
 </nav>
 
 </header>
 
-<div class="admin-container">
+<div class="admin-panel">
 
 <h1>👨‍💼 Admin Dashboard</h1>
+
+<div class="admin-card">
+
+<h2>Add New Product</h2>
 
 <form id="productForm">
 
@@ -40,36 +57,38 @@ required>
 <input
 type="number"
 id="price"
-placeholder="Product Price"
+placeholder="Price"
 required>
 
 <textarea
 id="description"
-placeholder="Product Description"></textarea>
+placeholder="Product Description"
+required></textarea>
 
-<label class="upload-box">
-
-<i class="fa-solid fa-image"></i>
-
-Choose Product Image
+<label class="upload">
 
 <input
 type="file"
 id="imageFile"
 accept="image/*"
-required
-hidden>
+hidden
+required>
+
+<i class="fas fa-image"></i>
+
+Choose Product Image
 
 </label>
 
 <img
 id="preview"
 src=""
-style="display:none;width:150px;border-radius:10px;margin:15px 0;">
+alt=""
+style="display:none;">
 
 <button type="submit">
 
-<i class="fa-solid fa-plus"></i>
+<i class="fas fa-plus-circle"></i>
 
 Add Product
 
@@ -77,7 +96,9 @@ Add Product
 
 </form>
 
-<hr>
+</div>
+
+<div class="admin-card">
 
 <h2>All Products</h2>
 
@@ -89,23 +110,28 @@ Add Product
 
 </div>
 
+</div>
+
 <script>
-const file=document.getElementById("imageFile");
+
+const imageFile=document.getElementById("imageFile");
+
 const preview=document.getElementById("preview");
 
-file.addEventListener("change",()=>{
+imageFile.addEventListener("change",()=>{
 
-const img=file.files[0];
+const file=imageFile.files[0];
 
-if(img){
+if(file){
 
-preview.src=URL.createObjectURL(img);
+preview.src=URL.createObjectURL(file);
 
 preview.style.display="block";
 
 }
 
 });
+
 </script>
 
 <script type="module" src="js/admin.js"></script>
