@@ -1,53 +1,62 @@
 // app.js
 
-import {
-  db
-} from "./firebase.js";
+import { db } from "./firebase.js";
 
 import {
   collection,
   getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const productContainer = document.querySelector(".products");
+// Use productList instead of .products
+const productContainer = document.getElementById("productList");
 
 // Load Products
 async function loadProducts() {
+
   if (!productContainer) return;
 
-  productContainer.innerHTML = "<p>Loading products...</p>";
+  productContainer.innerHTML = "<h3>Loading products...</h3>";
 
   try {
-    const querySnapshot = await getDocs(collection(db, "products"));
+
+    const snapshot = await getDocs(collection(db, "products"));
 
     productContainer.innerHTML = "";
 
-    if (querySnapshot.empty) {
-      productContainer.innerHTML =
-        "<h3>No products available.</h3>";
+    if (snapshot.empty) {
+      productContainer.innerHTML = "<h3>No Products Found</h3>";
       return;
     }
 
-    querySnapshot.forEach((doc) => {
+    snapshot.forEach((doc) => {
+
       const product = doc.data();
 
       productContainer.innerHTML += `
         <div class="card">
+
           <img src="${product.image}" alt="${product.name}">
+
           <h3>${product.name}</h3>
+
           <p>৳${product.price}</p>
-          <button onclick="alert('Product added to cart!')">
-            Add to Cart
-          </button>
+
+          <button>Add to Cart</button>
+
         </div>
       `;
+
     });
 
   } catch (error) {
+
     console.error(error);
+
     productContainer.innerHTML =
-      "<h3>Failed to load products.</h3>";
+      "<h3>❌ Failed to load products.</h3>";
+
   }
+
 }
 
 // Start App
